@@ -1,14 +1,14 @@
 Intro
 -----
 Printing the eui64 label on 6mm tape for RS sensornodes.
-The sensor node should be conncected via the USB-TTL cable.
+The sensor node should be connected via the USB-TTL cable.
 node should be flashed with firmware diag-rss2.avr-rss2
-which printouts the addr in reponse to the eui64 command.
+which printouts the addr in response to the eui64 command.
 
 This process is handled by tty_talk command.
 
-The PT2430PC should be connected to USB. It should give
-a device address typically /dev/usb/lp1
+The PT2430PC TZ-printer should be connected to USB. It should
+give a device address typically /dev/usb/lp1
 
 Tape
 ----
@@ -30,15 +30,15 @@ It's possible device protection needs to be altered.
 sudo chown root:lpadmin /dev/usb/lp1
 
 Sometimes the device /dev/usb/lp1 seems to be locked
-by Ubuntu (16.04 LTS). Reboot helps.
+by Ubuntu (16.04 LTS). Reboot seems to cure.
 
 
 To apply label
 --------------
-Tweezers can help to exact position.
-
+Tweezers can help to place at exact position.
 
 References
-----------
+ ----------
 https://github.com/cbdevnet/pt1230
+
 https://github.com/herjulf/tty_talk
