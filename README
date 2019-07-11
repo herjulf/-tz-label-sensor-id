@@ -1,0 +1,63 @@
+Intro
+-----
+A quick attempt to use a Brother PT-1230PC PT-2430PC under
+Linux. This driver has no connection to Brother Industries, Ltd.
+
+Based on the information I got from the QL-500/550 page:
+http://etc.nkadesign.com/Printers/QL550LabelPrinter
+
+Official PT-9500PC Raster Mode Command Reference PDF:
+http://etc.nkadesign.com/uploads/Printers/95CRRASE.pdf
+
+The switch set to the "E" position so that it appears as a USB
+printer to Linux.
+
+Install
+-------
+make builds a static version of pt1230. See github ref.
+ghostscript for converting arbitrary text.
+
+pt1230 sends a 64 pixel wide pbm file (created by gimp etc.)
+to the printer on /dev/usb/lp0 and a script which creates a 64
+pixel wide pbm file from it's arguments using gs.
+
+TODO
+----
+	So many things ...
+	
+	Look at the tape width returned from the printer and decide
+		if the image needs to be cropped/centered
+	The data sent to the printer could be optimised but given
+		USB is so fast compared to the printer, is it worth it?
+	Are there any different settings for different types of tape ?
+	
+Usage examples
+--------------
+cat image.pbm | pt1230 | lpr -PPT-1230PC
+
+pt1230 -f data.raw image.pbm
+
+pt1230 -f /dev/usb/lp1 image.pbm
+
+./labelprint "Hello World!"
+
+
+# Best to do images w. gimp.
+Have image in .xcf and save .pbm (ASCII)
+Image size approx 64x512 pixels for 12 mm TZ tape
+
+cat vortex_low_power_label.pbm | pt1230 > /dev/usb/lp1
+cat sensor-case.pbm | pt1230 > /dev/usb/lp1
+
+
+Issues
+------
+It's possible protection needs to be altered.
+sudo chown root:lpadmin /dev/usb/lp1
+
+Sometimes the device /dev/usb/lp1 seems to be locked
+by Ubuntu (16.04 LTS). Reboot helps.
+
+References
+----------
+https://github.com/cbdevnet/pt1230
